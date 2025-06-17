@@ -74,16 +74,16 @@ extension CustomHUD {
 extension CustomHUD {
     
     static func checkCurrentHUDType(_ type:HUDType) -> Bool{
-        var isCreatNewHUD:Bool = false
+        var isCreateNewHUD:Bool = false
         let hudViewController = customWindow()!.rootViewController as? HUDViewController
         if hudViewController == nil {
-            isCreatNewHUD = true
+            isCreateNewHUD = true
         }else{
             if hudViewController?.type != type {
-                isCreatNewHUD = true
+                isCreateNewHUD = true
             }
         }
-        return isCreatNewHUD
+        return isCreateNewHUD
     }
     
     static func inboxViewController(type:HUDType ,message:String?) -> HUDViewController
@@ -93,12 +93,12 @@ extension CustomHUD {
         hudViewController.maskColor = CustomHUD.instance.maskColor
         hudViewController.textColor = CustomHUD.instance.textColor
         hudViewController.allowUserInteraction = CustomHUD.instance.allowUserInteraction
-        hudViewController.message = self.creatMutableString(message: message)
+        hudViewController.message = self.createMutableString(message: message)
         hudViewController.type = type
         return hudViewController
     }
     
-    static func creatMutableString(message:String?) -> NSMutableAttributedString?{
+    static func createMutableString(message:String?) -> NSMutableAttributedString?{
         if message == nil {
             return nil
         }
