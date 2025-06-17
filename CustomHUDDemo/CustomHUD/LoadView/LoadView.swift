@@ -1,6 +1,6 @@
 //
 //  LoadView.swift
-//  AppleMap
+//  CustomHUD
 //
 //  Created by AllenShiu on 2017/3/23.
 //  Copyright © 2017年 AllenShiu. All rights reserved.
