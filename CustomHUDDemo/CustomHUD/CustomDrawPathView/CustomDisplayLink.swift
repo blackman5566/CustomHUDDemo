@@ -83,5 +83,6 @@ class CustomDisplayLink: NSObject {
     override init() {
         super.init()
         self.setupDisplayLink()
+        self.setupNotificationCenter()
     }
 }
