@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CustomDisplayLinkDelegate {
+protocol CustomDisplayLinkDelegate: AnyObject {
     func displayWillUpdateWithDeltaTime(deltaTime:CFTimeInterval)
 }
 
@@ -36,7 +36,7 @@ extension CustomDisplayLink {
         self.previousTimestamp = currentTime
         
         //把這個數值用 delegate 帶回去
-        self.delegate.displayWillUpdateWithDeltaTime(deltaTime: deltaTime)
+        self.delegate?.displayWillUpdateWithDeltaTime(deltaTime: deltaTime)
     }
     
     func removeDisplayLink(){
@@ -75,8 +75,8 @@ extension CustomDisplayLink {
 
 //MARK: life cycle
 class CustomDisplayLink: NSObject {
-    var delegate:CustomDisplayLinkDelegate!
-    var displayLink:CADisplayLink!
+    weak var delegate: CustomDisplayLinkDelegate?
+    var displayLink: CADisplayLink!
     var nextDeltaTimeZero:Bool = true
     var previousTimestamp:CFTimeInterval = 0
     
