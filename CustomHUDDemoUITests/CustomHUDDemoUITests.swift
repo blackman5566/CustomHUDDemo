@@ -40,4 +40,35 @@ final class CustomHUDDemoUITests: XCTestCase {
             }
         }
     }
+
+    @MainActor
+    func testHUDFlow() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let loadButton = app.buttons["顯示 LoadView"]
+        XCTAssertTrue(loadButton.exists)
+        loadButton.tap()
+
+        let loadingText = app.staticTexts["加載中"]
+        XCTAssertTrue(loadingText.waitForExistence(timeout: 2))
+
+        let notExist = NSPredicate(format: "exists == false")
+        let expectation = XCTNSPredicateExpectation(predicate: notExist, object: loadingText)
+        _ = XCTWaiter.wait(for: [expectation], timeout: 5)
+
+        let successButton = app.buttons["顯示成功"]
+        XCTAssertTrue(successButton.exists)
+        successButton.tap()
+        XCTAssertTrue(app.windows.count > 1)
+        sleep(2)
+        XCTAssertTrue(app.windows.count == 1)
+
+        let failButton = app.buttons["顯示失敗"]
+        XCTAssertTrue(failButton.exists)
+        failButton.tap()
+        XCTAssertTrue(app.windows.count > 1)
+        sleep(2)
+        XCTAssertTrue(app.windows.count == 1)
+    }
 }
