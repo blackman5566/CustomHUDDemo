@@ -1,48 +1,75 @@
-# ⏳ CustomHUD
+# ⏳ CustomHUD (UIKit Version)
 
-`CustomHUD` 是一個自訂的 iOS Loading View，可蓋住整個畫面，適用於處理資料等待或封鎖使用者操作期間的顯示提示。
+`CustomHUD` is a lightweight, fully customizable loading and status indicator for iOS.  
+It covers the entire screen and provides a clean way to block user interaction during long-running tasks, API requests, form submissions, or any asynchronous operations.
 
----
+Designed originally for UIKit-based apps, `CustomHUD` offers simple APIs, flexible styling, and support for custom animations or icons.
 
-## 💡 為什麼自己做？
+## 💡 Why build a custom HUD?
 
-市面上已有許多類似套件，但為了能依據專案需求更具彈性地客製化樣式、動畫、或互動行為，因此選擇自行實作 CustomHUD。
+While many HUD libraries exist (SVProgressHUD, MBProgressHUD, Toasts, etc.),  
+**this implementation focuses on:**
 
----
+- Full control over animation timing  
+- Easy styling and theme customization  
+- Precise control over user interaction  
+- Minimal dependencies  
+- Simple, predictable API surface  
 
-## 🔧 功能特點
+This HUD is also ideal when your project requires a **consistent design system** or when you want to avoid heavy 3rd-party dependencies.
 
-- ✅ 蓋住整個畫面，阻止使用者誤觸
-- ✅ 支援自定動畫、顏色與文字提示
-- ✅ 可簡單呼叫 `CustomHUD.show()` / `CustomHUD.hide(completion: nil)`
-- ✅ 容易擴充：可加入 icon、進度條、超時提示等功能
+## 🔧 Features
 
----
+- ✅ Full-screen overlay to prevent accidental touches  
+- ✅ Customizable colors, opacity, and animations  
+- ✅ Simple global API: `CustomHUD.show()` / `CustomHUD.hide()`  
+- ✅ Supports loading, success, failure, and message modes  
+- ✅ Designed for extendability (icons, progress, blur effects, etc.)  
+- ✅ Works in any UIKit environment (`UIWindow`, view controllers, modals, navigation stack)
 
-## 📦 使用範例
+## 📦 Usage Examples
 
 ```swift
-// 顯示 HUD
-CustomHUD.showMessage(message: "加載中")
+// Show loading HUD with text
+CustomHUD.showMessage(message: "Loading...")
 
-// 模擬延遲後隱藏
-CustomHUD.showMessage(message: "加載中", delay: 3)
+// Show loading and automatically hide after 3 seconds
+CustomHUD.showMessage(message: "Loading...", delay: 3)
 
-// 顯示成功
+// Show success icon with fade-out animation
 CustomHUD.showSuccess(completion: nil)
 
-//顯示失敗
+// Show failure icon
 CustomHUD.showFail(completion: nil)
-
 ```
 
----
+## 📘 When to use CustomHUD?
 
-🧩 建議搭配使用：
-- 任務型 API 呼叫（如登入、上傳）
-- 較長時間的計算或背景處理流程
+This HUD is useful in situations such as:
 
----
+- API calls (login, submit forms, update profile)
+- File uploads, downloads, or sync tasks
+- Long-running calculations
+- Payment or checkout flows
+- Blocking actions until validation completes
 
-📌 可延伸方向：
-- 加入 Lottie 動畫或模糊背景效果
+Essentially, **any moment you want a clean, app-wide “please wait” experience.**
+
+## 🧩 Extendability Ideas
+
+You can easily extend `CustomHUD` to support:
+
+- Lottie animations  
+- Blur or vibrancy background  
+- Dynamic color themes (light/dark)  
+- Progress indicators (circular or linear)  
+- Custom icons (success, error, warning, info)  
+- Queued or chained HUD sequences  
+
+The implementation is designed to stay modular so you can plug in your own animation layers.
+
+## ✔️ Summary
+
+`CustomHUD` is built with simplicity and flexibility in mind.  
+It avoids heavy dependencies while giving you full control over the user experience.  
+Perfect for UIKit projects that need a reliable, customizable loading indicator.
